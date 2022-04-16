@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from 'next-auth/react';
-import { stripe } from "../../../services/stripe";
+import { stripe } from "../../services/stripe";
 
-const subscribe =  async (req: NextApiRequest, res: NextApiResponse) => {
+const subscribe = async (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'POST') {
     const session = await getSession({ req })
 
@@ -24,7 +24,7 @@ const subscribe =  async (req: NextApiRequest, res: NextApiResponse) => {
       cancel_url: process.env.STRIPE_CANCEL_URL
     })
 
-    return res.status(200).json({ sessionId: stripecheckoutSession })
+    return res.status(200).json({ sessionId: stripecheckoutSession.id })
 
   } else {
     res.setHeader('Allow', 'POST')
