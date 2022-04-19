@@ -38,7 +38,7 @@ export async function saveSubscription(
     )
   } else {
     await fauna.query(
-      q.Replace(
+      q.Replace( 
         q.Select(
           "ref",
           q.Get(
