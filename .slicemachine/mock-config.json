@@ -1,13 +1,18 @@
 {
   "_cts": {
-    "1": {
-      "Title": {
+    "publication": {
+      "title": {
         "config": {
-          "patternType": "PARAGRAPH",
+          "patternType": "STORY",
+          "blocks": 1
+        }
+      },
+      "content": {
+        "config": {
+          "patternType": "STORY",
           "blocks": 1
         }
       }
-    },
-    "2": {}
+    }
   }
 }

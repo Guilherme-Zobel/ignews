@@ -1,0 +1,51 @@
+{
+  "id": "cdfbeaea-2f35-416d-8941-3f949df8d772",
+  "uid": "tenetur-minus-laborum",
+  "type": "publication",
+  "data": {
+    "title": [
+      {
+        "type": "heading1",
+        "text": "E-enable holistic interfaces",
+        "spans": []
+      },
+      {
+        "type": "image",
+        "dimensions": {
+          "width": 900,
+          "height": 500
+        },
+        "alt": "Placeholder image",
+        "copyright": null,
+        "url": "https://images.unsplash.com/photo-1589321599763-d66926c29613?w=900&h=500&fit=crop"
+      },
+      {
+        "type": "paragraph",
+        "text": "Commodo tempor elit anim cupidatat cupidatat culpa occaecat cillum officia eu et laboris eiusmod esse eu.",
+        "spans": []
+      }
+    ],
+    "content": [
+      {
+        "type": "heading1",
+        "text": "Reintermediate rich paradigms",
+        "spans": []
+      },
+      {
+        "type": "image",
+        "dimensions": {
+          "width": 900,
+          "height": 500
+        },
+        "alt": "Placeholder image",
+        "copyright": null,
+        "url": "https://images.unsplash.com/photo-1593642633279-1796119d5482?w=900&h=500&fit=crop"
+      },
+      {
+        "type": "paragraph",
+        "text": "Elit enim officia irure ea laboris aliquip ipsum sunt et dolore ad nisi dolore quis eiusmod. Sunt ad exercitation incididunt aliquip velit aliquip est ullamco quis nulla velit ipsum. Proident sit exercitation mollit est proident veniam tempor ad minim eu laboris.",
+        "spans": []
+      }
+    ]
+  }
+}
