@@ -1,55 +1,75 @@
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
 import Head from 'next/head';
 import Prismic from '@prismicio/client';
 import { getPrismicClient } from '../../services/prismic';
+import {RichText} from 'prismic-dom';
 import styles from './styles.module.scss';
 
-export default function Posts() {
-  return (
-    <>
-      <Head>
-        <title> Posts | Ignews</title>
-      </Head>
 
-        <main className={styles.container}>
-          <div className={styles.posts}>
-            <a href='#'>
-              <title>12 de março de 2022</title>
-              <strong>Creating a Monorepo with Lerna & Yarn Workspaces</strong>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita sint iure asperiores eum, quo vero hic, delectus doloremque alias corporis accusamus amet fugiat dolores optio deserunt id laudantium aliquid non?</p>
-            </a>
-            <a href='#'>
-              <title>12 de março de 2022</title>
-              <strong>Creating a Monorepo with Lerna & Yarn Workspaces</strong>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita sint iure asperiores eum, quo vero hic, delectus doloremque alias corporis accusamus amet fugiat dolores optio deserunt id laudantium aliquid non?</p>
-            </a>
-            <a href='#'>
-              <title>12 de março de 2022</title>
-              <strong>Creating a Monorepo with Lerna & Yarn Workspaces</strong>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita sint iure asperiores eum, quo vero hic, delectus doloremque alias corporis accusamus amet fugiat dolores optio deserunt id laudantium aliquid non?</p>
-            </a>
-          </div>
-        </main>
-    </>
-  );
+type Post = {
+    slug: string;
+    title: string;
+    excerpt: string;
+    updatedAt: string;
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const prismic = getPrismicClient()
+interface PostsProps {
+    posts: Post[]
+}
 
-  const response = await prismic.query([
-    Prismic.predicates.at('document.type', 'publication')
-  ], {
-    fetch: ['publication.title', 'publication.content'],
-    pageSize: 100,
-  })
+export default function Posts({posts}: PostsProps) {
+    return (
+        <>
+            <Head>
+                <title>Posts | Ignews</title>
+            </Head>
 
-  console.log(JSON.stringify(response, null, 2));
-  
+            <main className={styles.container}>
+                <div className={styles.posts}>
+                    {
+                        posts.map(post => (
+                            <Link key={post.slug} href={`/posts/${post.slug}`}>
+                                <a>
+                                    <time>{post.updatedAt}</time>
+                                    <strong>{post.title}</strong>
+                                    <p>{post.excerpt}</p>
+                                </a>
+                            </Link>
+                        ))
+                    }
+                </div>
+            </main>
+        </>
+    );
+}
 
-  return {
-    props: {
+export const getStaticProps: GetStaticProps = async() => {
+    const prismic = getPrismicClient();
+    const response = await prismic.query<any>([
+        Prismic.predicates.at('document.type', 'publication')
+    ], {
+        fetch: ['publication.title', 'publication.content'],
+        pageSize: 100
+    })
 
+    const posts = response.results.map(post => {
+        return {
+            slug: post.uid,
+            title: RichText.asText(post.data.title),
+            excerpt: post.data.content.find(content => content.type === 'paragraph')?.text ?? '',
+            updatedAt: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric'
+            })
+        }
+    })
+
+
+    return {
+        props: {
+            posts
+        }
     }
-  }
 }
