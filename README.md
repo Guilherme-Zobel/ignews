@@ -26,5 +26,3 @@ As postagens são feitas pelo painel do Prismic CMS e integradas diretamente pel
 - [Node](https://nodejs.org/en/)
 
 ![ignews](https://user-images.githubusercontent.com/87620994/165012246-b02ffe09-8cc3-4efa-8186-56d6305efef7.gif)
-
-
